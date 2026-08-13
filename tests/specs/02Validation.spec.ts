@@ -1,14 +1,19 @@
 import { expect } from '@wdio/globals'
-import { users } from '../../src/utils/userData.ts'
+import { users } from '../../src/utils/testData.ts'
+
+import restartHelper from '../../src/utils/restartHelper.ts'
+import header from '../../src/components/header.ts'
 import mainMenu from '../../src/components/mainMenu.ts'
 import loginScreen from '../../src/screens/login.screen.ts'
-import restartHelper from '../../src/utils/restartHelper.ts'
+import productsScreen from '../../src/screens/products.screen.ts'
+
 
 describe('Form validation, TC-02', () => {
     beforeEach(async () => {
-        restartHelper.restartApp()
+        await restartHelper.restartApp()
+        await productsScreen.waitForLoaded()
 
-        await mainMenu.openMainMenu()
+        await header.openMainMenu()
         await mainMenu.tapLoginMenuItem()
     })
 

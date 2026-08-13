@@ -24,6 +24,10 @@ class LoginScreen extends BaseScreen {
     async tapLoginBtn() {
         await this.tap(this.loginBtn)
     }
+
+    async tapFirstExampleBtn(){
+        await this.tap(this.firstExampleCredentialsBtn)
+    }
 }
 
 export default new LoginScreen()
