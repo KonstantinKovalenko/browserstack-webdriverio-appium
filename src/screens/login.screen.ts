@@ -2,14 +2,14 @@ import { $ } from '@wdio/globals'
 import BaseScreen from './base.screen.ts'
 
 class LoginScreen extends BaseScreen {
-    get loginTitle() {return $('id=com.saucelabs.mydemoapp.android:id/loginTV')}
+    get loginTitle() {return $('android=new UiSelector().className("android.widget.ImageView").instance(0)')}
 
-    get usernameInput() {return $('id=com.saucelabs.mydemoapp.android:id/nameET')}
-    get passwordInput() {return $('id=com.saucelabs.mydemoapp.android:id/passwordET')}
-    get passwordErrorMessage() {return $('id=com.saucelabs.mydemoapp.android:id/passwordErrorTV')}
-    get loginBtn() {return $('id=com.saucelabs.mydemoapp.android:id/loginBtn')}
+    get usernameInput() {return $('~test-Username')}
+    get passwordInput() {return $('~test-Password')}
+    get passwordErrorMessage() {return $('android=new UiSelector().text("Password is required")')}
+    get loginBtn() {return $('~test-LOGIN')}
 
-    get firstExampleCredentialsBtn() {return $('id=com.saucelabs.mydemoapp.android:id/username1TV')}
+    get firstExampleCredentialsBtn() {return $('android=new UiSelector().text("standard_user")')}
 
     async login(username: string, password: string) {
         await this.fill(this.usernameInput, username)
@@ -27,6 +27,12 @@ class LoginScreen extends BaseScreen {
 
     async tapFirstExampleBtn(){
         await this.tap(this.firstExampleCredentialsBtn)
+    }
+
+    async waitForLoaded() {
+        await this.loginTitle.waitForDisplayed({
+            timeout: 10000
+        })
     }
 }
 

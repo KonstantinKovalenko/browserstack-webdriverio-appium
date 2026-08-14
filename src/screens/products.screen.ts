@@ -1,15 +1,19 @@
 import { $ } from '@wdio/globals'
+import { ProductData } from '../types/product.ts'
 import BaseScreen from './base.screen.ts'
 
 class ProductsScreen extends BaseScreen {
-    get productsTitle() {return $('~title')}
-    get sortDialogTitle() {return $('id=com.saucelabs.mydemoapp.android:id/sortTV')}
+    get productsTitle() {return $('android=new UiSelector().text("PRODUCTS")')}
+    get sortDialogTitle() {return $('android=new UiSelector().text("Sort items by...")')}
 
-    get sortBtn() {return $('id=com.saucelabs.mydemoapp.android:id/sortIV')}
-    get sortOptionPriceLowToHigh() {return $('id=com.saucelabs.mydemoapp.android:id/priceAscCL')}
+    get changeViewBtn() {return $('android=new UiSelector().className("android.widget.ImageView").instance(4)')}
+    get sortBtn() {return $('android=new UiSelector().className("android.widget.ImageView").instance(5)')}
+    get sortOptionPriceLowToHigh() {return $('android=new UiSelector().text("Price (low to high)")')}
 
-    get productsPricesArray() {return $$('id=com.saucelabs.mydemoapp.android:id/priceTV')}
-    get productCards() {return $$('id=com.saucelabs.mydemoapp.android:id/productIV')}
+    get productCards() {return $$('(//android.view.ViewGroup[@content-desc="test-Item"])')}
+    get productsNamesArray() {return $$('//android.widget.TextView[@content-desc="test-Item title"]')}
+    get productsPricesArray() {return $$('//android.widget.TextView[@content-desc="test-Price"]')}
+    /* get addToCartBtnsArray() {return $$('//android.view.ViewGroup[@content-desc="test-ADD TO CART"]')} */
 
     async tapSortButton() {
         await this.tap(this.sortBtn)
@@ -19,20 +23,36 @@ class ProductsScreen extends BaseScreen {
         await this.tap(this.sortOptionPriceLowToHigh)
     }
 
-    /** select product by 1-based index */
-    async selectProductByIndex (index: number){
-        const productCards = await this.productCards
-        const maxIndex = await productCards.length
-        if(index < 1 || index > maxIndex){
-            throw new Error (`selectProductByIndex: index must be between 1 and ${maxIndex} inclusive, got ${index}`)
-        }
-        return this.tap(productCards[index-1])
+    async tapChangeViewBtn() {
+        await this.tap(this.changeViewBtn)
     }
 
-    async waitForLoaded() {
-        await this.productsTitle.waitForDisplayed({
-            timeout: 10000
-        })
+    /** add product to cart by 1-based index */
+    async addToCartByIndex (index: number){
+        await this.validateIndex(index)
+
+        const productCard = this.productCards[index - 1]
+        const addButton = productCard.$('//android.view.ViewGroup[@content-desc="test-ADD TO CART"]')
+
+        await this.tap(addButton)
+
+        /* await this.tap(this.addToCartBtnsArray[index-1]) */
+    }
+
+    async getProductDataByIndex(index: number): Promise<ProductData> {
+        await this.validateIndex(index)
+        return {
+            name: await this.productsNamesArray[index-1].getText(),
+            price: await this.productsPricesArray[index-1].getText()
+        }
+    }
+
+    async validateIndex(index: number){
+        const productCards = this.productCards
+        const maxIndex = await productCards.length
+        if(index < 1 || index > maxIndex){
+            throw new Error (`validateIndex: index must be between 1 and ${maxIndex} inclusive, got ${index}`)
+        }
     }
 }
 

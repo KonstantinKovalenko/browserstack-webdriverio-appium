@@ -28,26 +28,22 @@ export function isSortedAscending(array: number[]): boolean {
     return true
 }
 
-export function calculateTotalPrice(price: string, quantity: string, tax: number): string {
-    const priceText = price.match(/\d+(\.\d+)?/)
-    if (!priceText) {
-        throw new Error(`No price found in ${price}`) 
+export function calculateTotalAmount(itemTotal: string, tax: string): string {
+    const itemTotalMatch = itemTotal.match(/\d+(\.\d+)?/)
+    const taxMatch = tax.match(/\d+(\.\d+)?/)
+
+    if (!itemTotalMatch) {
+        throw new Error(`No price found in ${itemTotal}`)
     }
 
-    const quantityValue = parseInt(quantity)
-    const priceValue = parseFloat(priceText[0])
-
-    const totalPrice = (priceValue * quantityValue) + tax
-
-    return ("$ " + String(totalPrice))
-}
-
-export function extractNumber(value: string): string {
-    const match = value.match(/\d+/)
-
-    if (!match) {
-        throw new Error(`No number found in ${value}`)
+    if (!taxMatch) {
+        throw new Error(`No tax found in ${tax}`)
     }
 
-    return match[0]
+    const itemTotalValue = parseFloat(itemTotalMatch[0])
+    const taxValue = parseFloat(taxMatch[0])
+
+    const totalAmount = itemTotalValue + taxValue
+
+    return `Total: $${totalAmount.toFixed(2)}`
 }

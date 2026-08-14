@@ -2,26 +2,22 @@ import { $ } from '@wdio/globals'
 import BaseScreen from './base.screen.ts'
 
 class CheckoutScreen extends BaseScreen {
-    get shippingTitle() {return $('id=com.saucelabs.mydemoapp.android:id/enterShippingAddressTV')}
+    get checkoutTitle() {return $('android=new UiSelector().text("CHECKOUT: INFORMATION")')}
 
-    get shippingNameInput () {return $('id=com.saucelabs.mydemoapp.android:id/fullNameET')}
-    get shippingAddressInput () {return $('id=com.saucelabs.mydemoapp.android:id/address1ET')}
-    get shippingCityInput () {return $('id=com.saucelabs.mydemoapp.android:id/cityET')}
-    get shippingZipInput () {return $('id=com.saucelabs.mydemoapp.android:id/zipET')}
-    get shippingCountryInput () {return $('id=com.saucelabs.mydemoapp.android:id/countryET')}
+    get checkoutFirstnameInput () {return $('~test-First Name')}
+    get checkoutLastnameInput () {return $('~test-Last Name')}
+    get checkoutZipInput () {return $('~test-Zip/Postal Code')}
 
-    get toPaymentBtn () {return $('id=com.saucelabs.mydemoapp.android:id/paymentBtn')}
+    get continueBtn () {return $('~test-CONTINUE')}
 
-    async tapToPaymentBtn(){
-        await this.tap(this.toPaymentBtn)
+    async tapContinueBtn(){
+        await this.tap(this.continueBtn)
     }
 
-    async fillShippingAddress(name: string, address: string, city: string, zip: string, country: string) {
-        await this.fill(this.shippingNameInput, name)
-        await this.fill(this.shippingAddressInput, address)
-        await this.fill(this.shippingCityInput, city)
-        await this.fill(this.shippingZipInput, zip)
-        await this.fill(this.shippingCountryInput, country)
+    async fillShippingAddress(firstname: string, lastname: string, zip: string) {
+        await this.fill(this.checkoutFirstnameInput, firstname)
+        await this.fill(this.checkoutLastnameInput, lastname)
+        await this.fill(this.checkoutZipInput, zip)
     }
 }
 

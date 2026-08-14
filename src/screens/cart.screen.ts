@@ -3,31 +3,37 @@ import { ProductData } from '../types/product.ts'
 import BaseScreen from './base.screen.ts'
 
 class CartScreen extends BaseScreen {
-    get cartTitle() {return $('id=com.saucelabs.mydemoapp.android:id/productTV')}
-    get cartEmptyMessage() {return $('id=com.saucelabs.mydemoapp.android:id/noItemTitleTV')}
+    get cartTitle() {return $('android=new UiSelector().text("YOUR CART")')}
 
-    get productName() {return $('id=com.saucelabs.mydemoapp.android:id/titleTV')}
-    get productQuantity() {return $('id=com.saucelabs.mydemoapp.android:id/noTV')}
-    get productPrice() {return $('id=com.saucelabs.mydemoapp.android:id/priceTV')}
-    get productTotalPrice() {return $('id=com.saucelabs.mydemoapp.android:id/totalPriceTV')}
+    get productCards() {return $$('android=new UiSelector().description("test-Item")')}
+    get removeBtnsArray() {return $$('android=new UiSelector().description("test-REMOVE")')}
 
-    get removeBtn() {return $('id=com.saucelabs.mydemoapp.android:id/removeBt')}
-    get checkoutBtn() {return $('id=com.saucelabs.mydemoapp.android:id/cartBt')}
+    get checkoutBtn() {return $('android=new UiSelector().description("test-CHECKOUT")')}
     
-    async tapRemoveBtn() {
-        await this.tap(this.removeBtn)
-    }
-
     async tapCheckoutBtn(){
+        await this.checkoutBtn.scrollIntoView()
         await this.tap(this.checkoutBtn)
     }
 
-    async getProductData(): Promise<ProductData> {
+    async getProductDataByIndex(index: number): Promise<ProductData> {
+        await this.validateIndex(index)
         return {
-            name: await this.productName.getText(),
-            quantity: await this.productQuantity.getText(),
-            price: await this.productPrice.getText()
+            name: await $(`(//*[@content-desc="test-Description"])[${index}]/android.widget.TextView[1]`).getText(),
+            price: await $(`(//*[@content-desc="test-Price"])[${index}]/android.widget.TextView`).getText(),
         }
+    }
+
+    async validateIndex(index: number){
+        const productCards = this.productCards
+        const maxIndex = await productCards.length
+        if(index < 1 || index > maxIndex){
+            throw new Error (`validateIndex: index must be between 1 and ${maxIndex} inclusive, got ${index}`)
+        }
+    }
+
+    async removeFromCartByIndex (index: number){
+        await this.validateIndex(index)
+        await this.tap(this.removeBtnsArray[index-1])
     }
 }
 

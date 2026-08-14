@@ -2,10 +2,10 @@ import { $ } from '@wdio/globals'
 import BaseScreen from '../screens/base.screen.ts'
 
 class Header extends BaseScreen {
-    get hamburgerBtn () {return $('~View menu')}
-    get cartBtn () {return $('id=com.saucelabs.mydemoapp.android:id/cartRL')}
+    get hamburgerBtn () {return $('android=new UiSelector().className("android.widget.ImageView").instance(1)')}
+    get cartBtn () {return $('android=new UiSelector().className("android.widget.ImageView").instance(3)')}
 
-    get cartBadge () {return $('id=com.saucelabs.mydemoapp.android:id/cartTV')}
+    get cartBadge () {return $('//android.view.ViewGroup[@content-desc="test-Cart"]/android.view.ViewGroup/android.widget.TextView')}
 
     async openMainMenu(){
         await this.tap(this.hamburgerBtn)
