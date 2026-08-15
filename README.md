@@ -4,7 +4,7 @@ Test automation framework for the "" built with **WebdriverIO**, **Browserstack*
 
 ✔ Page Object Model (POM) architecture  
 
-[![CI](https://github.com/KonstantinKovalenko/browserstack-webdriverio-appium/actions/workflows/playwright.yml/badge.svg)](https://github.com/KonstantinKovalenko/browserstack-webdriverio-appium/actions/workflows/wdio.yml)
+[![CI](https://github.com/KonstantinKovalenko/browserstack-webdriverio-appium/actions/workflows/playwright.yml/badge.svg)](https://github.com/KonstantinKovalenko/browserstack-webdriverio-appium/actions/workflows/browserstack.yml)
 
 [![GitHub Pages](https://img.shields.io/badge/View-Latest_Report-blue?logo=github)](https://konstantinkovalenko.github.io/browserstack-webdriverio-appium/)
 

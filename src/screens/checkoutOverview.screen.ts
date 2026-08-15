@@ -7,7 +7,9 @@ class CheckoutOverviewScreen extends BaseScreen {
 
     get productCards() {return $$('android=new UiSelector().description("test-Item")')}
 
-    get itemTotal() {return $('//android.widget.TextView[starts-with(@text, "Item total:")]')}
+    get itemTotal() {
+        return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Item total:"))')
+    }
     get tax() {return $('//android.widget.TextView[starts-with(@text, "Tax:")]')}
     get totalAmount() {return $('//android.widget.TextView[starts-with(@text, "Total:")]')}
 
@@ -33,6 +35,12 @@ class CheckoutOverviewScreen extends BaseScreen {
         if(index < 1 || index > maxIndex){
             throw new Error (`validateIndex: index must be between 1 and ${maxIndex} inclusive, got ${index}`)
         }
+    }
+
+    async waitForLoaded() {
+        await this.itemTotal.waitForDisplayed({
+            timeout: 10000
+        })
     }
 }
 

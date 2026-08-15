@@ -54,8 +54,6 @@ describe('E2E Checkout, TC-05', () => {
         const overviewProduct2 = await checkoutOverviewScreen.getProductDataByIndex(2)
         await expect(overviewProduct2).toEqual(addedProduct2)
 
-        await checkoutOverviewScreen.finishBtn.scrollIntoView()
-
         const expectedTotalAmount = calculateTotalAmount(await checkoutOverviewScreen.itemTotal.getText(), await checkoutOverviewScreen.tax.getText())
         await expect(checkoutOverviewScreen.totalAmount).toHaveText(expectedTotalAmount)
 
