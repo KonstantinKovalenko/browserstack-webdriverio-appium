@@ -30,7 +30,14 @@ export const config: WebdriverIO.Config = {
 
     framework: 'mocha',
 
-    reporters: ['spec'],
+    reporters: [
+        'spec',
+        ['allure', {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false,
+        }],
+    ],
 
     services: ['browserstack'],
 
