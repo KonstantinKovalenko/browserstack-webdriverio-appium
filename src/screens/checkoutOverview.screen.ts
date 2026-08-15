@@ -11,7 +11,9 @@ class CheckoutOverviewScreen extends BaseScreen {
     get tax() {return $('//android.widget.TextView[starts-with(@text, "Tax:")]')}
     get totalAmount() {return $('//android.widget.TextView[starts-with(@text, "Total:")]')}
 
-    get finishBtn() {return $('~test-FINISH')}
+    get finishBtn() {
+        return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("test-FINISH"))')
+    }
     
     async tapFinishBtn (){
         await this.tap(this.finishBtn)

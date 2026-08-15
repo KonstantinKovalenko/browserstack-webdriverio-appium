@@ -8,7 +8,9 @@ class CartScreen extends BaseScreen {
     get productCards() {return $$('android=new UiSelector().description("test-Item")')}
     get removeBtnsArray() {return $$('android=new UiSelector().description("test-REMOVE")')}
 
-    get checkoutBtn() {return $('android=new UiSelector().description("test-CHECKOUT")')}
+    get checkoutBtn () {
+        return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("test-CHECKOUT"))')
+    }
     
     async tapCheckoutBtn(){
         await this.checkoutBtn.scrollIntoView()

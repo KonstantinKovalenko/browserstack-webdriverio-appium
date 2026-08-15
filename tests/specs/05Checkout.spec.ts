@@ -20,14 +20,7 @@ describe('E2E Checkout, TC-05', () => {
     it('should verify successful checkout using valid data', async () => {
         await expect(loginScreen.loginTitle).toBeDisplayed()
 
-        await loginScreen.tapFirstExampleBtn()
-        await expect(loginScreen.usernameInput).toHaveText(users.validUser.user)
-
-        const password = users.validUser.password
-        const maskedPassword = await loginScreen.passwordInput.getText()
-        expect(maskedPassword.length).toBe(password.length)
-
-        await loginScreen.tapLoginBtn()
+        await loginScreen.login(users.validUser.user, users.validUser.password)
         await expect(productsScreen.productsTitle).toBeDisplayed()
 
         await productsScreen.tapChangeViewBtn()

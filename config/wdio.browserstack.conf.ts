@@ -3,7 +3,7 @@ import 'dotenv/config'
 export const config: WebdriverIO.Config = {
     runner: 'local',
 
-    specs: ['./tests/specs/**/*.spec.ts'],
+    specs: ['../tests/specs/**/*.spec.ts'],
 
     maxInstances: 1,
 
@@ -20,8 +20,8 @@ export const config: WebdriverIO.Config = {
                 deviceName: 'Samsung Galaxy S22',
                 platformVersion: '12.0',
                 projectName: 'WDIO Appium BrowserStack',
-                buildName: 'BrowserStack Test',
-                sessionName: 'TC-01 Authentication',
+                buildName: 'WDIO Appium BrowserStack',
+                sessionName: 'WDIO Test Suite'
             },
         },
     ],
