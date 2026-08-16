@@ -13,7 +13,6 @@ class CartScreen extends BaseScreen {
     }
     
     async tapCheckoutBtn(){
-        await this.checkoutBtn.scrollIntoView()
         await this.tap(this.checkoutBtn)
     }
 

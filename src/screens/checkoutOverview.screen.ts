@@ -4,18 +4,13 @@ import BaseScreen from './base.screen.ts'
 
 class CheckoutOverviewScreen extends BaseScreen {
     get overviewTitle() {return $('android=new UiSelector().text("CHECKOUT: OVERVIEW")')}
-
     get productCards() {return $$('android=new UiSelector().description("test-Item")')}
 
-    get itemTotal() {
-        return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Item total:"))')
-    }
+    get itemTotal() {return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Item total:"))')}
     get tax() {return $('//android.widget.TextView[starts-with(@text, "Tax:")]')}
     get totalAmount() {return $('//android.widget.TextView[starts-with(@text, "Total:")]')}
 
-    get finishBtn() {
-        return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("test-FINISH"))')
-    }
+    get finishBtn() {return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("test-FINISH"))')}
     
     async tapFinishBtn (){
         await this.tap(this.finishBtn)

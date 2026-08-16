@@ -2,7 +2,6 @@ node_modules/
 
 .env
 
-# Logs
 log/
 logs/
 
@@ -11,3 +10,5 @@ allure-report/
 
 .DS_Store
 Thumbs.db
+
+Video/

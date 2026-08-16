@@ -13,7 +13,6 @@ class ProductsScreen extends BaseScreen {
     get productCards() {return $$('(//android.view.ViewGroup[@content-desc="test-Item"])')}
     get productsNamesArray() {return $$('//android.widget.TextView[@content-desc="test-Item title"]')}
     get productsPricesArray() {return $$('//android.widget.TextView[@content-desc="test-Price"]')}
-    /* get addToCartBtnsArray() {return $$('//android.view.ViewGroup[@content-desc="test-ADD TO CART"]')} */
 
     async tapSortButton() {
         await this.tap(this.sortBtn)
@@ -33,10 +32,7 @@ class ProductsScreen extends BaseScreen {
 
         const productCard = this.productCards[index - 1]
         const addButton = productCard.$('//android.view.ViewGroup[@content-desc="test-ADD TO CART"]')
-
         await this.tap(addButton)
-
-        /* await this.tap(this.addToCartBtnsArray[index-1]) */
     }
 
     async getProductDataByIndex(index: number): Promise<ProductData> {

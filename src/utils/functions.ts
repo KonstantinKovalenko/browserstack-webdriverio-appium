@@ -14,7 +14,6 @@ export async function extractNumbersFromElements(array: ChainablePromiseArray): 
 
         resultArray.push(parseFloat(checkPrice[0]))
     }
-
     return resultArray
 }
 
@@ -24,7 +23,6 @@ export function isSortedAscending(array: number[]): boolean {
             return false
         }
     }
-
     return true
 }
 
@@ -42,7 +40,6 @@ export function calculateTotalAmount(itemTotal: string, tax: string): string {
 
     const itemTotalValue = parseFloat(itemTotalMatch[0])
     const taxValue = parseFloat(taxMatch[0])
-
     const totalAmount = itemTotalValue + taxValue
 
     return `Total: $${totalAmount.toFixed(2)}`
