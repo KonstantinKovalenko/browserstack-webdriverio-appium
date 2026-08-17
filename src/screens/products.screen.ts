@@ -6,8 +6,8 @@ class ProductsScreen extends BaseScreen {
     get productsTitle() {return $('android=new UiSelector().text("PRODUCTS")')}
     get sortDialogTitle() {return $('android=new UiSelector().text("Sort items by...")')}
 
-    get changeViewBtn() {return $('android=new UiSelector().className("android.widget.ImageView").instance(4)')}
-    get sortBtn() {return $('android=new UiSelector().className("android.widget.ImageView").instance(5)')}
+    get changeViewBtn() {return $('~test-Toggle')}
+    get sortBtn() {return $('~test-Modal Selector Button')}
     get sortOptionPriceLowToHigh() {return $('android=new UiSelector().text("Price (low to high)")')}
 
     get productCards() {return $$('(//android.view.ViewGroup[@content-desc="test-Item"])')}
@@ -30,18 +30,24 @@ class ProductsScreen extends BaseScreen {
     async addToCartByIndex (index: number){
         await this.validateIndex(index)
 
-        const productCard = this.productCards[index - 1]
+        const productCards = await this.productCards
+        const productCard = productCards[index - 1]
+
         const addButton = productCard.$('//android.view.ViewGroup[@content-desc="test-ADD TO CART"]')
         await this.tap(addButton)
     }
 
     async getProductDataByIndex(index: number): Promise<ProductData> {
         await this.validateIndex(index)
+
+        const productNames = await this.productsNamesArray
+        const productPrices = await this.productsPricesArray
+
         return {
-            name: await this.productsNamesArray[index-1].getText(),
-            price: await this.productsPricesArray[index-1].getText()
+            name: await productNames[index - 1].getText(),
+            price: await productPrices[index - 1].getText()
         }
-    }
+}
 
     async validateIndex(index: number){
         const productCards = this.productCards

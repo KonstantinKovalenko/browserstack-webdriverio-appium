@@ -2,8 +2,8 @@ import { $ } from '@wdio/globals'
 import BaseScreen from '../screens/base.screen.ts'
 
 class Header extends BaseScreen {
-    get hamburgerBtn () {return $('android=new UiSelector().className("android.widget.ImageView").instance(1)')}
-    get cartBtn () {return $('android=new UiSelector().className("android.widget.ImageView").instance(3)')}
+    get hamburgerBtn () {return $('~test-Menu')}
+    get cartBtn () {return $('~test-Cart')}
     get cartBadge () {return $('//android.view.ViewGroup[@content-desc="test-Cart"]/android.view.ViewGroup/android.widget.TextView')}
 
     async openMainMenu(){

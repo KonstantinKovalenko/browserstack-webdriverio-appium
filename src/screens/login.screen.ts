@@ -2,7 +2,7 @@ import { $ } from '@wdio/globals'
 import BaseScreen from './base.screen.ts'
 
 class LoginScreen extends BaseScreen {
-    get loginTitle() {return $('android=new UiSelector().className("android.widget.ImageView").instance(0)')}
+    get loginTitle() {return $('~test-Login')}
 
     get usernameInput() {return $('~test-Username')}
     get passwordInput() {return $('~test-Password')}

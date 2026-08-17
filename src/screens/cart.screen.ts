@@ -32,9 +32,11 @@ class CartScreen extends BaseScreen {
         }
     }
 
-    async removeFromCartByIndex (index: number){
+    async removeFromCartByIndex(index: number) {
         await this.validateIndex(index)
-        await this.tap(this.removeBtnsArray[index-1])
+
+        const removeButtons = await this.removeBtnsArray
+        await this.tap(removeButtons[index - 1])
     }
 }
 
